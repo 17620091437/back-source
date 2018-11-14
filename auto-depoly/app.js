@@ -24,7 +24,7 @@ app.post('/front-source/', (req, res) => {
 // 自动部署后端代码
 app.post('/back-source/', (req, res) => {
   let cmds = [
-    `cd ${config.FRONT_SOURCE_PATH}`,
+    `cd ${config.BACK_SOURCE_PATH}`,
     `git pull`
   ];
   let code = shelljs.exec(cmds.join(' && ')).code;
