@@ -1,0 +1,30 @@
+{
+  "name": "sever",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production pm2 start app.js --watch",
+    "dev_server": "cross-env NODE_ENV=development pm2 start app.js --watch",
+    "test_server": "cross-env NODE_ENV=test pm2 start app.js --watch",
+    "dev_m2t": "cross-env NODE_ENV=development node script/model-to-table.js",
+    "test_m2t": "cross-env NODE_ENV=test node script/model-to-table.js",
+    "prod_m2t": "cross-env NODE_ENV=production node script/model-to-table.js",
+    "seed": "sequelize db:seed:undo:all && sequelize db:seed:all",
+    "dev_seed": "npm run dev_m2t && cross-env NODE_ENV=development npm run seed",
+    "test_seed": "npm run test_m2t && cross-env NODE_ENV=test npm run seed",
+    "prod_seed": "npm run prod_m2t && cross-env NODE_ENV=production npm run seed"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.13",
+    "multer": "^1.4.1",
+    "mysql2": "^1.6.1",
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.0.0"
+  }
+}
