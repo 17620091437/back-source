@@ -5,6 +5,11 @@ const shelljs = require('shelljs');
 
 const app = express();
 
+//bodyParser设置
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
 // 自动部署前端代码
 app.post('/front-source/', (req, res) => {
   let cmds = [
