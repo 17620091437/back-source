@@ -9,6 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// 测试自动部署
 
 // 自动部署前端代码
 app.post('/front-source/', (req, res) => {
