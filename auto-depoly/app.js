@@ -9,7 +9,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// 测试自动部署2
 
 // 自动部署前端代码
 app.post('/front-source/', (req, res) => {
@@ -29,7 +28,6 @@ app.post('/front-source/', (req, res) => {
 
 // 自动部署后端代码
 app.post('/back-source/', (req, res) => {
-  console.log(req.body);
   let cmds = [
     `cd ${config.BACK_SOURCE_PATH}`,
     `git pull`
