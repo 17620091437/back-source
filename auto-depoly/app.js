@@ -29,7 +29,7 @@ app.post('/front-source/', (req, res) => {
 
 // 自动部署后端代码
 app.post('/back-source/', (req, res) => {
-  console.log(res.body);
+  console.log(req.body);
   let cmds = [
     `cd ${config.BACK_SOURCE_PATH}`,
     `git pull`
