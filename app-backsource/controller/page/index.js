@@ -1,5 +1,5 @@
 module.exports = {
   index: (req, res) => {
-    res.render('index', { aa: 123 })
+    res.render("index", { aa: 123 });
   }
-}
+};
