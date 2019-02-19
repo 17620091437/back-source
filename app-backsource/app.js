@@ -28,5 +28,23 @@ middleware(app);
 // 设置路由
 router(app);
 
+// 错误处理
+app.use(function(err, req, res, next) {
+  console.error(err);
+  res.status(500).send({
+    status: 500,
+    msg: err.message
+  });
+});
+
+app.use((req, res, next) => {
+  let endTime = new Date().getTime();
+  console.log(
+    `<-- ${req.method} :  path: ${req.originalUrl}   to: ${
+      req.ip
+    }   time: ${endTime - req.time}ms`
+  );
+});
+
 app.listen(config.PORT);
 console.log(`listening port in ${config.PORT}...`);

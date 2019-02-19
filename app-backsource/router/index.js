@@ -16,16 +16,14 @@ module.exports = function(app) {
     let fileName = api.action.split(".")[0]; // api 文件名
     let action = api.action.split(".")[1]; // 该文件下的action函数
     let fileFun = require(`../controller/api/${fileName}`); // 载入api文件
-    app[api.method](config.BASE_URL + api.path, async (req, res) => {
+    app[api.method](config.BASE_URL + api.path, async (req, res, next) => {
       // api统一处理错误
       try {
-        await fileFun[action](req, res);
+        await fileFun[action](req, res, next);
       } catch (err) {
-        res.status(500).send({
-          status: 500,
-          msg: err.message
-        });
+        next(err);
       }
+      next();
     });
   });
 };

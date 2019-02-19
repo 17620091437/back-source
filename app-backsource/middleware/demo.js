@@ -15,9 +15,10 @@ module.exports = function(req, res, next) {
   let sec =
     date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
   console.log(
-    `${req.method} : ${year}/${month}/${day} ${hour}:${min}:${sec}  path: ${
+    `--> ${req.method} : ${year}/${month}/${day} ${hour}:${min}:${sec}  path: ${
       req.originalUrl
     }    from:${req.ip}`
   );
+  req.time = date.getTime();
   next();
 };

@@ -1,8 +1,8 @@
 module.exports = {
-  demo: (req, res) => {
+  async demo(req, res) {
     res.send({ aa: 123 });
   },
-  postDemo: (req, res) => {
+  async postDemo(req, res) {
     console.log(req.body);
     res.send({ msg: "yes" });
   }

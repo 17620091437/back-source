@@ -1,7 +1,7 @@
 const util = require("../../common/util");
 
 module.exports = {
-  getRecommend: (req, res) => {
+  async getRecommend(req, res) {
     res.send([
       {
         title: "最热大牌",
@@ -124,7 +124,7 @@ module.exports = {
       }
     ]);
   },
-  getHot: async (req, res) => {
+  async getHot(req, res) {
     await util.sleep(3000);
     res.send([
       {

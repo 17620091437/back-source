@@ -23,5 +23,10 @@ module.exports = [
     method: "get",
     path: "/product",
     action: "product.getProductList"
+  },
+  {
+    method: "get",
+    path: "/tags",
+    action: "product.getTagList"
   }
 ];
