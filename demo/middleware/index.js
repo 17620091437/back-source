@@ -10,6 +10,7 @@ let middlewareArr = [];   // 中间件处理函数数组
 // 中间件文件名数组
 let middlewareStringArr = [
   'demo',
+  'errorCatch'
 ];
 
 // 载入中间件文件，并存放中间件函数
