@@ -1,21 +1,25 @@
 /**
  * 错误处理中间件
  */
-
-module.exports = async (req, res, next) => {
+module.exports = async (ctx, next) => {
   try {
-    console.log(111);
     await next();
   } catch (err) {
-    if (/api/.test(req.originalUrl)) {
+    console.log('======================================='.yellow.bold);
+    console.log('************ ERROR MESSAGE ************'.red.bold);
+    console.log(gb_color.magenta(err.stack));
+    console.log('************ ERROR MESSAGE ************'.red.bold);
+    console.log('======================================='.yellow.bold);
+    if (/api/.test(ctx.originalUrl)) {
       // api错误处理
-      res.status(500).send({
+      ctx.status = 500;
+      ctx.body = {
         status: 500,
         msg: err.message
-      })
+      }
     } else {
       // 页面错误处理
-      res.redirect('/error');
+      ctx.redirect('/error');
     }
   }
 }

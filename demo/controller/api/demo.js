@@ -1,5 +1,11 @@
 module.exports = {
-  demo: (req, res) => {
-    res.send({ aa: 123 })
+  demo: async (ctx, next) => {
+    // throw new Error('asjdha');
+    aa()
+    ctx.body = {
+      status: 200,
+      message: 'demo test',
+      data: []
+    }
   }
 }
