@@ -12,7 +12,9 @@ global.gb_color = require('colors');
 // 中间件文件名数组
 let middlewareStringArr = [
   'log',
-  'errorCatch'
+  'errorCatch',
+  // 'jwt',
+  'jwt-parser'
 ];
 
 // 载入中间件文件，并存放中间件函数

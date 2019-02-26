@@ -1,7 +1,6 @@
-// const express = require('express');
-// const app = express();
 const config = require("./common/config");
 const router = require("./router");
+const jwt = require('koa-jwt');
 const bodyParser = require("body-parser");
 const path = require("path");
 const ejs = require("ejs");
@@ -27,11 +26,10 @@ const app = new Koa();
 const middleware = require("./middleware");
 middleware(app);
 
+
 // 设置路由
 app.use(router.routes()).use(router.allowedMethods());
 
-// app.listen(config.PORT);
-// console.log(`listening port in ${config.PORT}...`);
 
 app.listen(config.PORT, () => {
   console.log(`==================================`);
