@@ -13,7 +13,6 @@ global.gb_color = require('colors');
 let middlewareStringArr = [
   'log',
   'errorCatch',
-  // 'jwt',
   'jwt-parser'
 ];
 
