@@ -66,10 +66,10 @@ const sequelize = new Sequelize(dbConfig[NODE_ENV].database, dbConfig[NODE_ENV].
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Connect mysql database successfully!');
+    console.log('Connect mysql database successfully!'.green.bold);
   })
   .catch(err => {
-    console.error('Unable to connect to the database:', err);
+    console.error('Unable to connect to the database:', err.message);
     process.exit()
   });
 

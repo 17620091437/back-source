@@ -1,7 +1,7 @@
 const jwt = require('jwt-simple');
 module.exports = async (ctx, next) => {
   let token = (ctx.body && ctx.body.access_token) || (ctx.query && ctx.query.access_token) || ctx.header.access_token;
-  // 过滤
+  // 是否过滤
   let isAllow = false;
   // api
   if (/^\/api/.test(ctx.originalUrl)) {
@@ -14,7 +14,7 @@ module.exports = async (ctx, next) => {
   } else {
     // 页面
     isAllow = !GB_CONFIG.JWT_PATH.pagePath.some(item => {
-      return item.test(ctx.originalUrl)
+      return item.test(ctx.originalUrl);
     })
   }
 

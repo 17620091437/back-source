@@ -1,14 +1,14 @@
 module.exports = {
   error: async (ctx, next) => {
     ctx.status = 500;
-    ctx.body = '500 错误页面！';
+    await ctx.render('service/error', { err: '' });
   },
   forbidden: async (ctx, next) => {
     ctx.status = 403;
-    ctx.body = '403 Forbidden';
+    await ctx.render('service/forbidden');
   },
   notFound: async (ctx, next) => {
     ctx.status = 404;
-    ctx.body = '404 NOT FOUND';
+    await ctx.render('service/404');
   }
 }

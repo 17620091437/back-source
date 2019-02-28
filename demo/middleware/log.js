@@ -18,21 +18,20 @@ module.exports = async (ctx, next) => {
   console.log(
     `==>  ${ctx.method}  ${year}-${month}-${day} ${hour}:${min}:${sec}  path:${
       ctx.originalUrl
-      }  ip:${ctx.ip}`.blue.bold
+      }  ip:${ctx.ip}`.white.bold
   );
   await next();
   let endTime = new Date().getTime();
-  if (ctx.status == 500) {
-    console.log(
-      `<==  ${ctx.method}(${ctx.status})  path:${ctx.originalUrl}  ip:${
-        ctx.ip
-        }  time:${endTime - startDate.getTime()}ms`.red.bold
+  let statusType = parseInt(parseInt(ctx.status) / 100);
+  let str = `<==  ${ctx.method}(${ctx.status})  path:${ctx.originalUrl}  ip:${ctx.ip}  time:${endTime - startDate.getTime()}ms`
+  if (statusType === 5) {
+    console.log(str.red.bold
     );
-  } else {
-    console.log(
-      `<==  ${ctx.method}(${ctx.status})  path:${ctx.originalUrl}  ip:${
-        ctx.ip
-        }  time:${endTime - startDate.getTime()}ms`.blue.bold
-    );
+  } else if (statusType === 4) {
+    console.log(str.magenta.bold);
+  } else if (statusType === 3) {
+    console.log(str.cyan.bold);
+  } else if (statusType === 2) {
+    console.log(str.green.bold);
   }
 }

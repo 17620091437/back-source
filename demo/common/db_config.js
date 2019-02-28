@@ -1,3 +1,8 @@
+/*
+ *  数据库各个环境配置
+ *
+ */
+
 module.exports = {
   development: {
     username: 'root',

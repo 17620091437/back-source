@@ -1,3 +1,8 @@
+/*
+ *  全局设置
+ *  可访问全局变量GB_CONFIG获取
+ */
+
 const config = {
   APP_NAME: "DEMO APP",
   PORT: "8080", // 服务器监听端口

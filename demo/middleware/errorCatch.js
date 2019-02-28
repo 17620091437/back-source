@@ -21,7 +21,9 @@ module.exports = async (ctx, next) => {
       }
     } else {
       // 页面错误处理
-      ctx.redirect('/error');
+      // ctx.redirect('/error');
+      ctx.status = 500;
+      await ctx.render('service/error', { err: err.message });
     }
   }
 }

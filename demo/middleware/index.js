@@ -3,12 +3,7 @@
  * 因为考虑到中间件的先后顺序，要手动填写middleware文件名数组
  */
 
-const fs = require('fs');
-const path = require('path');
 let middlewareArr = [];   // 中间件处理函数数组
-global.gb_color = require('colors');
-
-
 // 中间件文件名数组
 let middlewareStringArr = [
   'log',
