@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const dbConfig = require('./db_config');
 const NODE_ENV = process.env.NODE_ENV || 'development';
+require('colors');
 
 const operatorsAliases = {
   $eq: Op.eq,
