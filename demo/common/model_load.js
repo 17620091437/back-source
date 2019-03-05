@@ -7,11 +7,11 @@ modelList.forEach(item => {
   if (!/\.js/.test(item)) {
     throw new Error('确保Model文件夹全部是js文件')
   }
-  let model = formatModel(item);
+  let modelConfig = require(`${__dirname}/../model/${item}`);
+  let model = formatModel(modelConfig.tableName);
   if (global[model]) {
     throw new Error(`Node 全局已存在 ${model} 变量`);
   }
-  let modelConfig = require(`${__dirname}/../model/${item}`);
   global[model] = db.define(
     modelConfig.tableName,
     modelConfig.tableStruct,
