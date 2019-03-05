@@ -1,3 +1,4 @@
+global.isSeed = true;
 const fs = require('fs');
 require('colors');
 require('../common/model_load');    // 数据库表对象
@@ -27,9 +28,13 @@ async function main() {
       console.log(`Creating ${seederData.tableName} table data...`.blue.bold);
       await global[model].bulkCreate(seederData.data);
       console.log(`Create ${seederData.tableName} table data successfully!`.green.bold);
+      console.log('');
     } catch (err) {
+      console.log('');
       console.log(`Create ${seederData.tableName} table data failed!`.red.bold);
       console.log(`Error message:${err}`.red.bold);
+      console.log('');
+      throw err;
       break;
     }
   }

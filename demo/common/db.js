@@ -64,14 +64,15 @@ const sequelize = new Sequelize(dbConfig[NODE_ENV].database, dbConfig[NODE_ENV].
 });
 
 // 测试连接
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connect mysql database successfully!'.green.bold);
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err.message);
-    process.exit()
-  });
-
+if (!global.isSeed) {
+  sequelize
+    .authenticate()
+    .then(() => {
+      console.log('Connect mysql database successfully!'.green.bold);
+    })
+    .catch(err => {
+      console.error('Unable to connect to the database:', err.message);
+      process.exit()
+    });
+}
 module.exports = sequelize;
