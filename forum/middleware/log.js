@@ -15,6 +15,7 @@ module.exports = async (ctx, next) => {
     startDate.getMinutes() < 10 ? "0" + startDate.getMinutes() : startDate.getMinutes();
   let sec =
     startDate.getSeconds() < 10 ? "0" + startDate.getSeconds() : startDate.getSeconds();
+  console.log(ctx.header);
   console.log(
     `==>  ${ctx.method}  ${year}-${month}-${day} ${hour}:${min}:${sec}  path:${
       ctx.originalUrl
