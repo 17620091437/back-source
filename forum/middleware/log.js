@@ -15,16 +15,16 @@ module.exports = async (ctx, next) => {
     startDate.getMinutes() < 10 ? "0" + startDate.getMinutes() : startDate.getMinutes();
   let sec =
     startDate.getSeconds() < 10 ? "0" + startDate.getSeconds() : startDate.getSeconds();
-  console.log(ctx.header);
+  let ip = ctx.header['x-real-ip'] || ctx.ip;   // nginx 转发ip
   console.log(
     `==>  ${ctx.method}  ${year}-${month}-${day} ${hour}:${min}:${sec}  path:${
       ctx.originalUrl
-      }  ip:${ctx.ip}`.white.bold
+      }  ip:${ip}`.white.bold
   );
   await next();
   let endTime = new Date().getTime();
   let statusType = parseInt(parseInt(ctx.status) / 100);
-  let str = `<==  ${ctx.method}(${ctx.status})  path:${ctx.originalUrl}  ip:${ctx.ip}  time:${endTime - startDate.getTime()}ms`
+  let str = `<==  ${ctx.method}(${ctx.status})  path:${ctx.originalUrl}  ip:${ip}  time:${endTime - startDate.getTime()}ms`
   if (statusType === 5) {
     console.log(str.red.bold
     );
