@@ -23,7 +23,6 @@ module.exports = {
       allowNull: false,
       validate: {
         notEmpty: true,
-        len: [5, 16]
       }
     },
     name: {
@@ -38,9 +37,6 @@ module.exports = {
       type: Sequelize.INTEGER(1),
       defaultValue: 0,
       allowNull: false,
-      validate: {
-        isIn: [0, 1, 2]  // 0保密  1男  2女
-      }
     },
     // 粉丝数
     follow: {

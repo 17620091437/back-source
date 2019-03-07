@@ -25,7 +25,7 @@ modelList.forEach(item => {
       deletedAt: 'deleted_at',
       version: true // 乐观锁
     });
-})
+});
 
 function formatModel(fileName) {
   fileName = fileName.replace(/\.js/, '');

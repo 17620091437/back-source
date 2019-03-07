@@ -1,6 +1,7 @@
 /**
  * 错误处理中间件
  */
+const color = require('colors')
 module.exports = async (ctx, next) => {
   try {
     await next();
@@ -9,7 +10,7 @@ module.exports = async (ctx, next) => {
   } catch (err) {
     console.log('======================================='.yellow.bold);
     console.log('************ ERROR MESSAGE ************'.red.bold);
-    console.log(gb_color.magenta(err.stack));
+    console.log(color.magenta(err.message));
     console.log('************ ERROR MESSAGE ************'.red.bold);
     console.log('======================================='.yellow.bold);
     if (/api/.test(ctx.originalUrl)) {

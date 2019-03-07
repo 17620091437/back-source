@@ -9,7 +9,14 @@ module.exports = async (ctx, next) => {
       // 去除前缀
       let reg = new RegExp(`^/api/${GB_CONFIG.API_VERSION}`);
       let url = ctx.originalUrl.replace(reg, '');
-      return item.test(url);
+
+      if (item.method && item.path && (item.path instanceof RegExp)) {
+        // 如果指定方法
+        return (item.method.toUpperCase() === ctx.method.toUpperCase()) && item.path.test(url)
+      } else {
+        // 没有指定方法，所有都行
+        return (item instanceof RegExp) && item.test(url);
+      }
     });
   } else {
     // 页面

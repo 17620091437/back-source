@@ -3,18 +3,19 @@ require('colors');
 require("ejs");
 
 const Koa = require("koa");
-const bodyParser = require("body-parser");
+const bodyParser = require('koa-bodyparser');
 const middleware = require("./middleware");
 const view = require('koa-views');
 const static = require('koa-static');
 const router = require("./router");
 
 const app = new Koa();
-
+app.use(bodyParser());
 // 连接mysql数据库
 require('./common/db');
 require('./common/model_load'); // 载入数据库模型
 require('./common/model_relation'); // 载入模型关系
+require('./common/service_load')  // 载入service全局对象
 
 //设置模板目录
 app.use(view('./view', { map: { html: 'ejs' } }));
