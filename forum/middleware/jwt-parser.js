@@ -1,6 +1,6 @@
 const jwt = require('jwt-simple');
 module.exports = async (ctx, next) => {
-  let token = (ctx.body && ctx.body.access_token) || (ctx.query && ctx.query.access_token) || ctx.header.access_token;
+  let token = (ctx.request.body && ctx.request.body.access_token) || (ctx.query && ctx.query.access_token) || ctx.header.access_token || ctx.cookies.get('access_token');
   // 是否过滤
   let isAllow = false;
   // api
@@ -48,5 +48,6 @@ module.exports = async (ctx, next) => {
       }
       return;
     }
+    await next();
   }
 }

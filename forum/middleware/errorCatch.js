@@ -6,7 +6,11 @@ module.exports = async (ctx, next) => {
   try {
     await next();
     // 处理404
-    ctx.status == 404 && ctx.originalUrl != '/404' && ctx.redirect('/404');
+    if (/api/.test(ctx.originalUrl)) {
+      ctx.status == 404 && ctx.originalUrl != '/404' && ctx.error(404, 'not found', 404);
+    } else {
+      ctx.status == 404 && ctx.originalUrl != '/404' && ctx.redirect('/404');
+    }
   } catch (err) {
     console.log('======================================='.yellow.bold);
     console.log('************ ERROR MESSAGE ************'.red.bold);

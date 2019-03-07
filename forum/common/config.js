@@ -23,7 +23,7 @@ const config = {
       {
         method: 'post',
         path: /^\/user$/
-      }
+      },
     ]
   }
 };

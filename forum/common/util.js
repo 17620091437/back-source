@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const jwt = require('jwt-simple');
 module.exports = {
   // 检测帐号
   checkAccount(account) {
@@ -22,5 +23,15 @@ module.exports = {
       result = crypto.createHash('md5').update(string).digest('hex');
     }
     return result.toUpperCase();
+  },
+  // 生成token
+  createToken(userId, info) {
+    const tokenExpiresTime = process.env.NODE_ENV === 'production' ? 7 * 24 * 3600 * 100 : 365 * 24 * 3600 * 1000;
+    const payload = {
+      userId,
+      info,
+      expires: Date.now() + tokenExpiresTime
+    }
+    return jwt.encode(payload, GB_CONFIG.JWT_SECRET);
   }
 }

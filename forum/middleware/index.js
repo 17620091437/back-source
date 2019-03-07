@@ -6,6 +6,7 @@
 let middlewareArr = [];   // 中间件处理函数数组
 // 中间件文件名数组
 let middlewareStringArr = [
+  'config',
   'log',
   'errorCatch',
   'jwt-parser'
@@ -21,5 +22,5 @@ module.exports = function (app) {
   // 载入所有中间件
   middlewareArr.forEach(middleware => {
     app.use(middleware);
-  })
+  });
 }

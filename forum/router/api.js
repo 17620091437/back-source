@@ -13,5 +13,10 @@ module.exports = [
     method: 'post',
     path: '/user',
     action: 'user.register'
+  },
+  {
+    method: 'put',
+    path: '/user/:id',
+    action: 'user.update'
   }
 ]

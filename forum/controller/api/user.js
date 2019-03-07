@@ -3,21 +3,14 @@ module.exports = {
     let account = ctx.request.body.account;
     let password = ctx.request.body.password;
     let res = await UserService.login(account, password);
-    if (res) {
-      ctx.body = {
-        code: 200,
-        message: 'success',
-        data: [],
-      }
+    if (res.res) {
+      ctx.cookies.set('access_token', res.token, {});
+      ctx.success(200, { id: res.data.id, token: res.token });
     } else {
-      ctx.body = {
-        code: 500,
-        message: 'error',
-        data: [],
-      }
+      ctx.error(500, res.errMsg);
     }
-
   },
+
   async register(ctx, next) {
     let account = ctx.request.body.account;
     let password = ctx.request.body.password;
@@ -28,5 +21,23 @@ module.exports = {
       message: 'success',
       data: [res],
     }
+  },
+
+  async update(ctx) {
+    let action = ctx.request.body.action;
+    let userId = ctx.params.id;
+    if (action === 'UPDATE_PASSWORD') {
+      let oldP = ctx.request.body.oldPassword;
+      let newP = ctx.request.body.newPassword;
+      let secP = ctx.request.body.secPassword;
+      let res = await UserService.changePassword(userId, oldP, newP, secP);
+      if (res.res) {
+        ctx.success(200, { id: res.data.id });
+      } else {
+        ctx.error(500, res.errMsg);
+      }
+      return;
+    }
+    ctx.error(500, 'Invalid Action');
   }
 }
