@@ -35,15 +35,15 @@ module.exports = async (ctx, next) => {
       if (payload.expires < Date.now()) throw new Error();
       ctx.state.payload = payload;
     } catch (err) {
-      ctx.status = 403;
-      // 403页面跳转
+      ctx.status = 401;
+      // 401页面跳转
       if (!/^\/api/.test(ctx.originalUrl)) {
         ctx.redirect('/forbidden');
         return;
       }
       // 接口返回
       ctx.body = {
-        status: 403,
+        status: 401,
         message: 'Token Invalid'
       }
       return;

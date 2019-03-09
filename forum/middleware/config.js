@@ -10,7 +10,7 @@ module.exports = async (ctx, next) => {
     ctx.body = {
       code,
       message: 'success',
-      data,
+      data: data,
     }
   };
   ctx.error = (code, message, status = 200) => {
@@ -20,5 +20,12 @@ module.exports = async (ctx, next) => {
       message
     }
   };
+  ctx.invalid = (code = 401, message = 'unauthorized') => {
+    ctx.status = code;
+    ctx.body = {
+      code,
+      message
+    }
+  }
   await next();
 }

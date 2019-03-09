@@ -25,12 +25,24 @@ module.exports = {
 
   async update(ctx) {
     let action = ctx.request.body.action;
-    let userId = ctx.params.id;
+    let userId = parseInt(ctx.params.id);
+    if (ctx.state.payload.userId !== userId) return ctx.invalid();
     if (action === 'UPDATE_PASSWORD') {
       let oldP = ctx.request.body.oldPassword;
       let newP = ctx.request.body.newPassword;
       let secP = ctx.request.body.secPassword;
       let res = await UserService.changePassword(userId, oldP, newP, secP);
+      if (res.res) {
+        ctx.success(200, { id: res.data.id });
+      } else {
+        ctx.error(500, res.errMsg);
+      }
+      return;
+    }
+    if (action === 'UPDATE_INFO') {
+      let name = ctx.request.body.name;
+      let sex = parseInt(ctx.request.body.sex);
+      let res = await UserService.updateInfo(userId, { name, sex });
       if (res.res) {
         ctx.success(200, { id: res.data.id });
       } else {
