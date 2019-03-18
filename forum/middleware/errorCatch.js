@@ -14,7 +14,7 @@ module.exports = async (ctx, next) => {
   } catch (err) {
     console.log('======================================='.yellow.bold);
     console.log('************ ERROR MESSAGE ************'.red.bold);
-    console.log(color.magenta(err.message));
+    console.log(color.magenta(err.stack));
     console.log('************ ERROR MESSAGE ************'.red.bold);
     console.log('======================================='.yellow.bold);
     if (/api/.test(ctx.originalUrl)) {

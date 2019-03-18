@@ -11,7 +11,10 @@ module.exports = {
     user_id: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      primaryKey: true
+    },
+    topic_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
     },
     title: {
       type: Sequelize.STRING,

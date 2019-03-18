@@ -18,7 +18,7 @@ serviceList.forEach(item => {
     throw new Error(`Node 全局已存在 ${serviceName} 变量`);
   }
   if (global[modelName]) {
-    global[serviceName] = Object.assign(baseService, service);
+    global[serviceName] = Object.assign({}, service);
     global[serviceName].model = global[modelName];
   } else {
     throw new Error(`当前${serviceName} Service 没有对应的Model ${modelName}`);

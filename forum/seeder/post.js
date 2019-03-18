@@ -3,11 +3,13 @@ module.exports = {
   data: [
     {
       user_id: 1,
+      topic_id: 1,
       title: "篮球1",
       content: "篮球噢噢噢噢"
     },
     {
       user_id: 1,
+      topic_id: 1,
       title: "篮球1",
       content: "篮球噢噢噢噢"
     }

@@ -16,14 +16,11 @@ const config = {
     // api不需要检测路径
     apiPath: [
       /^\/demo/,
-      {
-        method: 'post',
-        path: /^\/login/
-      },
-      {
-        method: 'post',
-        path: /^\/user$/
-      },
+      { method: 'post', path: /^\/login/ }, // 登录
+      { method: 'post', path: /^\/user$/ }, // 注册
+      { method: 'get', path: /^\/topic$/ },  // 话题列表
+      { method: 'get', path: /^\/post$/ },  // 帖子列表
+      { method: 'get', path: /^\/post\/[0-9]+$/ } // 帖子详情
     ]
   }
 };
