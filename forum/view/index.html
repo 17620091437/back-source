@@ -6,10 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <%- include('./tpl/_style',{projectName:'forum'}); %>
 </head>
 
 <body>
-  <h1 style="font-size:50px;">我的网站</h1>
+  <div id="app">
+  </div>
+  <%- include('./tpl/_script',{projectName:'forum'}); %>
 </body>
 
 </html>
