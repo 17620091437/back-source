@@ -24,7 +24,7 @@ app.use(async (ctx, next) => {
   ctx.set("Access-Control-Allow-Methods", "OPTIONS,POST,GET,HEAD,DELETE,PUT");
   //必需。指定服务器允许进行跨域资源访问的请求头列表，一般用在响应预检请求上
   ctx.set("Access-Control-Allow-Headers", "x-requested-with, accept, origin, content-type");
-  next();
+  await next();
 });
 
 //设置模板目录
