@@ -19,11 +19,12 @@ require('./common/service_load')  // 载入service全局对象
 
 // CROS设置
 app.use(async (ctx, next) => {
-  ctx.header["Access-Control-Allow-Origin"] = "*";
-  ctx.header["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept";
-  ctx.header["Access-Control-Allow-Methods"] = "PUT,POST,GET,DELETE,OPTIONS";
-  ctx.header["X-Powered-By"] = ' 3.2.1';
-  await next();
+  ctx.set("Access-Control-Allow-Origin", "*");
+  //指定服务器允许进行跨域资源访问的请求方法列表，一般用在响应预检请求上
+  ctx.set("Access-Control-Allow-Methods", "OPTIONS,POST,GET,HEAD,DELETE,PUT");
+  //必需。指定服务器允许进行跨域资源访问的请求头列表，一般用在响应预检请求上
+  ctx.set("Access-Control-Allow-Headers", "x-requested-with, accept, origin, content-type");
+  next();
 });
 
 //设置模板目录
