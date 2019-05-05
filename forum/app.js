@@ -17,6 +17,15 @@ require('./common/model_load'); // 载入数据库模型
 require('./common/model_relation'); // 载入模型关系
 require('./common/service_load')  // 载入service全局对象
 
+// CROS设置
+app.use(async (ctx, next) => {
+  ctx.header["Access-Control-Allow-Origin"] = "*";
+  ctx.header["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept";
+  ctx.header["Access-Control-Allow-Methods"] = "PUT,POST,GET,DELETE,OPTIONS";
+  ctx.header["X-Powered-By"] = ' 3.2.1';
+  await next();
+});
+
 //设置模板目录
 app.use(view('./view', { map: { html: 'ejs' } }));
 // 载入所有中间件
