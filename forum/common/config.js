@@ -20,7 +20,8 @@ const config = {
       { method: 'post', path: /^\/user$/ }, // 注册
       { method: 'get', path: /^\/topic$/ },  // 话题列表
       { method: 'get', path: /^\/post$/ },  // 帖子列表
-      { method: 'get', path: /^\/post\/[0-9]+$/ } // 帖子详情
+      { method: 'get', path: /^\/post\/[0-9]+$/ }, // 帖子详情
+      { method: 'get', path: /^\/comment$/ },  // 评论列表
     ]
   }
 };

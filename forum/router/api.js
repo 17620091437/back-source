@@ -44,19 +44,19 @@ module.exports = [
     action: 'post.getById'
   },
   {
-    method:'post',
-    path:'/post',
-    action:'post.create'
+    method: 'post',
+    path: '/post',
+    action: 'post.create'
   },
   {
-    method:'put',
-    path:'/post',
-    action:'post.update'
+    method: 'put',
+    path: '/post/:id',
+    action: 'post.update'
   },
   {
-    method:'delete',
-    path:'/post/:id',
-    action:'post.delete'
+    method: 'delete',
+    path: '/post/:id',
+    action: 'post.delete'
   },
   /**
    * 评论接口
@@ -67,23 +67,37 @@ module.exports = [
     action: 'comment.getList'
   },
   {
-    method: 'get',
+    method: 'post',
+    path: '/comment',
+    action: 'comment.create'
+  },
+  {
+    method: 'delete',
     path: '/comment/:id',
-    action: 'comment.getById'
+    action: 'comment.delete'
+  },
+  /**
+   * 关注
+   */
+  {
+    method: 'get',
+    path: '/follow',
+    action: 'user.follow'
   },
   {
-    method:'post',
-    path:'/comment',
-    action:'comment.create'
+    method: 'get',
+    path: '/follow-list',
+    action: 'user.getFollowList'
   },
   {
-    method:'put',
-    path:'/comment',
-    action:'comment.update'
-  },
-  {
-    method:'delete',
-    path:'/comment/:id',
-    action:'comment.delete'
-  },
+    method: 'get',
+    path: '/fans-list',
+    action: 'user.getFansList'
+  }
+  /**
+   * 收藏
+   */
+  /**
+   * 点赞
+   */
 ]

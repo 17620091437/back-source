@@ -11,5 +11,10 @@ module.exports = {
       password: 'ABCDEFG',
       name: '哈哈',
     },
+    {
+      account: 'crazyball666',
+      password: 'ABCDEFG',
+      name: '哈哈',
+    },
   ]
 }
