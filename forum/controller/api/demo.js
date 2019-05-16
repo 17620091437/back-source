@@ -18,9 +18,9 @@ module.exports = {
       const reader = fs.createReadStream(file.path);
       let fileName = Date.now() + `-${file.name}`;
       let uploadPath = path.resolve(__dirname, '../../static/upload');
-      if (!fs.existsSync(uploadPath)) {  //判断staic/upload文件夹是否存在，如果不存在就新建一个
-        fs.mkdirSync(uploadPath)
-      }
+      // if (!fs.existsSync(uploadPath)) {  //判断staic/upload文件夹是否存在，如果不存在就新建一个
+      //   fs.mkdirSync(uploadPath)
+      // }
       // 创建可写流
       const upStream = fs.createWriteStream(path.resolve(__dirname, `../../static/upload/${fileName}`));
       // 可读流通过管道写入可写流
