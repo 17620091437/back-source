@@ -26,14 +26,13 @@ module.exports = {
       // 可读流通过管道写入可写流
       reader.pipe(upStream);
       ctx.body = {
-        code: 200,
-        message: 'success',
-        data: `//39.108.174.110/upload/${fileName}`
+        errno: 0,
+        // data 是一个数组，返回若干图片的线上地址
+        data: [`//39.108.174.110/upload/${fileName}`]
       };
     } catch (err) {
       ctx.body = {
-        code: 500,
-        message: err,
+        errno: 1
       };
     }
   },
