@@ -4,6 +4,11 @@ module.exports = [
     path: '/demo',
     action: 'demo.demo'
   },
+  {
+    method: 'post',
+    path: '/upload',
+    action: 'demo.upload'
+  },
   /**
    * 用户接口
    */

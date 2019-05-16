@@ -1,4 +1,6 @@
 const jwt = require('jwt-simple');
+const fs = require('fs');
+const path = require('path')
 module.exports = {
   demo: async (ctx, next) => {
     const token = ctx.header.authorization
@@ -6,6 +8,33 @@ module.exports = {
       status: 200,
       message: 'demo test',
       data: []
+    }
+  },
+  async upload(ctx) {
+    // 上传单个文件
+    const file = ctx.request.files.file; // 获取上传文件
+    try {
+      // 创建可读流
+      const reader = fs.createReadStream(file.path);
+      let fileName = Date.now() + `-${file.name}`;
+      let uploadPath = path.resolve(__dirname, '../../static/upload');
+      if (!fs.existsSync(uploadPath)) {  //判断staic/upload文件夹是否存在，如果不存在就新建一个
+        fs.mkdirSync(uploadPath)
+      }
+      // 创建可写流
+      const upStream = fs.createWriteStream(path.resolve(__dirname, `../../static/upload/${fileName}`));
+      // 可读流通过管道写入可写流
+      reader.pipe(upStream);
+      ctx.body = {
+        code: 200,
+        message: 'success',
+        data: `//localhost:8001/upload/${fileName}`
+      };
+    } catch (err) {
+      ctx.body = {
+        code: 500,
+        message: err,
+      };
     }
   },
   login: async (ctx, next) => {

@@ -4,7 +4,12 @@ module.exports = {
     let password = ctx.request.body.password;
     let res = await UserService.login(account, password);
     if (res.res) {
-      ctx.cookies.set('access_token', res.token, {});
+      ctx.cookies.set('access_token', res.token, {
+        maxAge: 1000 * 60 * 60 * 1,
+        expires: new Date('2019-07-06'),
+        httpOnly: false,
+        overwrite: false
+      });
       ctx.success(200, { id: res.data.id, token: res.token });
     } else {
       ctx.error(500, res.errMsg);
@@ -14,8 +19,10 @@ module.exports = {
   async register(ctx, next) {
     let account = ctx.request.body.account;
     let password = ctx.request.body.password;
+    let confirmPassword = ctx.request.body.confirmPassword;
     let name = ctx.request.body.name;
-    let res = await UserService.registerUser(account, password, name);
+    let sex = parseInt(ctx.request.body.sex)
+    let res = await UserService.registerUser(account, password, confirmPassword, name, sex);
     if (res.res) {
       ctx.success(200, { id: res.data.id });
     } else {

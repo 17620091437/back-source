@@ -1,7 +1,12 @@
 module.exports = {
-  async getList(page = 1, pageCount = 10) {
+  async getList(page = 1, pageCount = 10, topicId = 0) {
+    let where = {};
+    if (topicId !== 0) {
+      where.topic_id = topicId
+    }
     let data = await Post.findAndCountAll({
       offset: (page - 1) * pageCount,
+      where,
       limit: pageCount,
       attributes: { exclude: ['content'] },
       include: [
@@ -17,9 +22,6 @@ module.exports = {
         {
           model: User,
           attributes: ['id', 'name', 'follow', 'sex'],
-          include: {
-            model: FollowRelation
-          }
         },
         { model: Topic, attributes: ['id', 'title'] }
       ]

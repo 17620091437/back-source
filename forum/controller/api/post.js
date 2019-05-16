@@ -1,8 +1,9 @@
 module.exports = {
   async getList(ctx) {
     let page = ctx.query.page;
+    let topicId = ctx.query.topicId ? parseInt(ctx.query.topicId) : 0;
     let pageCount = 10;
-    let data = await PostService.getList(page, pageCount);
+    let data = await PostService.getList(page, pageCount, topicId);
     ctx.success(200, data);
   },
   async getById(ctx) {
@@ -12,8 +13,7 @@ module.exports = {
     ctx.success(200, data);
   },
   async create(ctx) {
-    let userId = parseInt(ctx.request.body.userId);
-    if (ctx.state.payload.userId !== userId) return ctx.invalid();
+    let userId = parseInt(ctx.state.payload.userId);
     let res = await PostService.create(userId, parseInt(ctx.request.body.topicId), ctx.request.body.title, ctx.request.body.content);
     if (res.res) {
       ctx.success(200, res.data);

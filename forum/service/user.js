@@ -21,16 +21,17 @@ module.exports = {
     return { res: true, errMsg, data: user, token };
   },
   // 注册
-  async registerUser(account, password, name) {
+  async registerUser(account, password, confirmPassword, name, sex) {
     let res = false;
     if (!util.checkAccount(account)) return { res, errMsg: '账号格式非法！' };
     if (!util.checkPassword(password)) return { res, errMsg: '密码格式非法！' };
+    if (password !== confirmPassword) return { res, errMsg: '两次密码不一致' };
     if (!util.checkName(name)) return { res, errMsg: '昵称格式非法！' };
     // 判断帐号是否存在
     let user = await User.findOne({ where: { account } });
     if (user) return { res, errMsg: '帐号已存在' };
     password = util.encrypt(password);
-    let data = await User.create({ account, password, name }, {
+    let data = await User.create({ account, password, name, sex }, {
       attributes: ['id', 'account'],
     });
     return { res: true, data };
