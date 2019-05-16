@@ -10,7 +10,7 @@ module.exports = {
         httpOnly: false,
         overwrite: false
       });
-      ctx.success(200, { id: res.data.id, token: res.token });
+      ctx.success(200, { id: res.data.id, name: res.data.name, token: res.token });
     } else {
       ctx.error(500, res.errMsg);
     }

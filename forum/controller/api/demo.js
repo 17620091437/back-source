@@ -28,7 +28,7 @@ module.exports = {
       ctx.body = {
         code: 200,
         message: 'success',
-        data: `//localhost:8001/upload/${fileName}`
+        data: `//39.108.174.110/upload/${fileName}`
       };
     } catch (err) {
       ctx.body = {
