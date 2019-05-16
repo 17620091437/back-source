@@ -8,7 +8,7 @@ module.exports = async (ctx, next) => {
     isAllow = GB_CONFIG.JWT_PATH.apiPath.some(item => {
       // 去除前缀
       let reg = new RegExp(`^/api/${GB_CONFIG.API_VERSION}`);
-      let url = ctx.originalUrl.replace(reg, '');
+      let url = ctx.path.replace(reg, '');
       // 去除后缀
       url = url.replace(/\/$/, '');
 
