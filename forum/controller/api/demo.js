@@ -22,14 +22,14 @@ module.exports = {
       //   fs.mkdirSync(uploadPath)
       // }
       // 创建可写流
-      const upStream = fs.createWriteStream(path.resolve(__dirname, `../../static/upload/${fileName}`));
+      const upStream = fs.createWriteStream(path.resolve(__dirname, `../../../../front-source/static/upload/${fileName}`));
       // 可读流通过管道写入可写流
       reader.pipe(upStream);
       // await sleep(1000)
       ctx.body = {
         errno: 0,
         // data 是一个数组，返回若干图片的线上地址
-        data: [`//39.108.174.110/upload/${fileName}`]
+        data: [`//39.108.174.110/static/upload/${fileName}`]
       };
     } catch (err) {
       ctx.body = {
