@@ -33,10 +33,12 @@ module.exports = async (ctx, next) => {
     try {
       // 校验token
       let payload = jwt.decode(token, GB_CONFIG.JWT_SECRET);
+      console.log(payload);
       // 是否过期
       if (payload.expires < Date.now()) throw new Error();
       ctx.state.payload = payload;
     } catch (err) {
+      console.log(err);
       ctx.status = 401;
       // 401页面跳转
       if (!/^\/api/.test(ctx.originalUrl)) {
