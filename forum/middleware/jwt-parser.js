@@ -1,7 +1,5 @@
 const jwt = require('jwt-simple');
 module.exports = async (ctx, next) => {
-  console.log(ctx.headers)
-  console.log(ctx.header)
   let token = (ctx.request.body && ctx.request.body.access_token) || (ctx.query && ctx.query.access_token) || ctx.header.access_token || ctx.cookies.get('access_token') || ctx.headers.access_token;
   // 是否过滤
   let isAllow = false;
@@ -35,12 +33,10 @@ module.exports = async (ctx, next) => {
     try {
       // 校验token
       let payload = jwt.decode(token, GB_CONFIG.JWT_SECRET);
-      console.log(payload);
       // 是否过期
       if (payload.expires < Date.now()) throw new Error();
       ctx.state.payload = payload;
     } catch (err) {
-      console.log(err);
       ctx.status = 401;
       // 401页面跳转
       if (!/^\/api/.test(ctx.originalUrl)) {
