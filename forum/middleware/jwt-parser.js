@@ -1,6 +1,8 @@
 const jwt = require('jwt-simple');
 module.exports = async (ctx, next) => {
-  let token = (ctx.request.body && ctx.request.body.access_token) || (ctx.query && ctx.query.access_token) || ctx.header.access_token || ctx.cookies.get('access_token');
+  console.log(ctx.headers)
+  console.log(ctx.header)
+  let token = (ctx.request.body && ctx.request.body.access_token) || (ctx.query && ctx.query.access_token) || ctx.header.access_token || ctx.cookies.get('access_token') || ctx.headers.access_token;
   // 是否过滤
   let isAllow = false;
   // api
