@@ -13,6 +13,11 @@ module.exports = [
    * 用户接口
    */
   {
+    method: 'get',
+    path: '/user/:id',
+    action: 'user.detail'
+  },
+  {
     method: 'post',
     path: '/login',
     action: 'user.login'

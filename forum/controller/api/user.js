@@ -29,11 +29,20 @@ module.exports = {
       ctx.error(500, res.errMsg);
     }
   },
-
+  // 查看个人信息
+  async detail(ctx) {
+    let userId = parseInt(ctx.params.id);
+    let res = await UserService.getDetail(userId);
+    if (res.res) {
+      ctx.success(200, res.data);
+    } else {
+      ctx.error(500, res.errMsg);
+    }
+  },
   async update(ctx) {
     let action = ctx.request.body.action;
     let userId = parseInt(ctx.params.id);
-    if (ctx.state.payload.userId !== userId) return ctx.invalid();
+    if (ctx.state.payload.userId !== userId) return ctx.forbidden();
     if (action === 'UPDATE_PASSWORD') {
       let oldP = ctx.request.body.oldPassword;
       let newP = ctx.request.body.newPassword;
@@ -64,7 +73,7 @@ module.exports = {
   async follow(ctx) {
     let followUserId = parseInt(ctx.query.userId);  // 被关注id
     let fansUserId = ctx.state.payload.userId;
-    if (!fansUserId) return ctx.errMsg(500, '没有登录');
+    if (!fansUserId) return ctx.invalid('没有登录');
     let res = await UserService.follow(fansUserId, followUserId);
     if (res.res) {
       ctx.success(200, res.data);
@@ -76,7 +85,6 @@ module.exports = {
   // 关注列表
   async getFollowList(ctx) {
     let userId = ctx.query.userId;
-    console.log(userId)
     res = await UserService.getFollowList(userId);
     if (res.res) {
       ctx.success(200, res.data);

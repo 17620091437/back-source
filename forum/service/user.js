@@ -20,6 +20,15 @@ module.exports = {
     let token = util.createToken(user.id, null);
     return { res: true, errMsg, data: user, token };
   },
+  async getDetail(userId) {
+    let res = false;
+    if (!userId) return { res, errMsg: '缺少用户id' };
+    let data = await User.findByPk(userId, {
+      attributes: ['account', 'name', 'sex', 'follow']
+    });
+    if (!data) return { res, errMsg: '用户不存在' }
+    return { res: true, data };
+  },
   // 注册
   async registerUser(account, password, confirmPassword, name, sex) {
     let res = false;
