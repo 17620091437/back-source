@@ -23,21 +23,21 @@ module.exports = async (ctx, next) => {
   ctx.invalid = (message = 'unauthorized') => {
     ctx.status = 401;
     ctx.body = {
-      code,
+      code: 401,
       message
     }
   }
   ctx.notFound = (message = 'not found') => {
     ctx.status = 404;
     ctx.body = {
-      code,
+      code: 404,
       message
     }
   }
   ctx.forbidden = (message = 'forbidden') => {
     ctx.status = 403;
     ctx.body = {
-      code,
+      code: 403,
       message
     }
   }
