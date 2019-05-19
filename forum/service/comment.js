@@ -13,7 +13,7 @@ module.exports = {
           include: [
             {
               model: User,
-              as: 'follow-list',
+              as: 'fans-list',
               attributes: ['id', 'account', 'name', 'follow', 'sex', 'fans', 'avator'],
               through: {
                 attributes: [],
