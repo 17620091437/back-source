@@ -12,15 +12,15 @@ module.exports = {
       include: [
         {
           model: User,
-          attributes: User.showAttributes,
+          attributes: ['id', 'account', 'name', 'follow', 'sex', 'fans', 'avator'],
           include: [
             {
               model: User,
               as: 'follow-list',
-              attributes: User.showAttributes,
-              where: { id: userId },
+              attributes: ['id', 'account', 'name', 'follow', 'sex', 'fans', 'avator'],
               through: {
                 attributes: [],
+                where: { fans_user_id: userId }
               }
             }
           ]
@@ -35,7 +35,7 @@ module.exports = {
       include: [
         {
           model: User,
-          attributes: User.showAttributes,
+          attributes: ['id', 'account', 'name', 'follow', 'sex', 'fans', 'avator'],
         },
         { model: Topic, attributes: ['id', 'title'] }
       ]

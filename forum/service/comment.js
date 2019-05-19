@@ -1,5 +1,5 @@
 module.exports = {
-  async getList(postId, page = 1, pageCount = 10) {
+  async getList(postId, userId = 0, page = 1, pageCount = 10) {
     if (!postId) return { res: false, errMsg: '缺少帖子ID' };
     let data = await Comment.findAndCountAll({
       where: { post_id: postId },
@@ -7,7 +7,21 @@ module.exports = {
       offset: (page - 1) * pageCount,
       limit: pageCount,
       include: [
-        { model: User, attributes: User.showAttributes, },
+        {
+          model: User,
+          attributes: ['id', 'account', 'name', 'follow', 'sex', 'fans', 'avator'],
+          include: [
+            {
+              model: User,
+              as: 'follow-list',
+              attributes: ['id', 'account', 'name', 'follow', 'sex', 'fans', 'avator'],
+              through: {
+                attributes: [],
+                where: { fans_user_id: userId }
+              }
+            }
+          ]
+        },
       ]
     });
     return { res: true, data };

@@ -3,7 +3,8 @@ module.exports = {
     let page = ctx.query.page;
     let pageCount = 10;
     let postId = ctx.query.postId;
-    let res = await CommentService.getList(postId, page, pageCount);
+    let userId = (ctx.state.payload && parseInt(ctx.state.payload.userId)) || 0;
+    let res = await CommentService.getList(postId, userId, page, pageCount);
     if (res.res) {
       ctx.success(200, res.data);
     } else {
