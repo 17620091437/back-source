@@ -39,7 +39,7 @@ module.exports = {
 
     // 判断帐号是否存在
     let user = await User.findOne({ where: { account } });
-    if (user.id) return { res, errMsg: '帐号已存在' };
+    if (user) return { res, errMsg: '帐号已存在' };
     password = util.encrypt(password);
     let userObj = { account, password, name, sex };
     if (avator) userObj.avator = avator;
@@ -78,7 +78,7 @@ module.exports = {
     let avator = info.avator;
     try {
       let user = await User.findOne({ where: { id: userId } });
-      if (!user.id) return { res, errMsg: '帐号不存在' };
+      if (!user) return { res, errMsg: '帐号不存在' };
       if (!util.checkName(name)) return { res, errMsg: '名称格式非法' };
       if (!/^[0,1,2]$/.test(sex)) return { res, errMsg: '性别格式非法' };
       let userObj = { name, sex };
@@ -129,7 +129,7 @@ module.exports = {
         }
       ]
     });
-    if (!data.id) return { res, errMsg: '用户不存在' };
+    if (!data) return { res, errMsg: '用户不存在' };
     return { res: true, data };
   },
 
@@ -151,7 +151,7 @@ module.exports = {
         }
       ]
     });
-    if (!data.id) return { res, errMsg: '用户不存在' };
+    if (!data) return { res, errMsg: '用户不存在' };
     return { res: true, data };
   }
 }
