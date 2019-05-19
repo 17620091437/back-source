@@ -4,6 +4,7 @@ module.exports = {
     let data = await Comment.findAndCountAll({
       where: { post_id: postId },
       attributes: { exclude: ['version', 'deleted_at', 'updated_at'] },
+      order: [['created_at', 'DESC']],
       offset: (page - 1) * pageCount,
       limit: pageCount,
       include: [

@@ -96,6 +96,11 @@ module.exports = [
   },
   {
     method: 'get',
+    path: '/unfollow',
+    action: 'user.unfollow'
+  },
+  {
+    method: 'get',
     path: '/follow-list',
     action: 'user.getFollowList'
   },

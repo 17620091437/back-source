@@ -28,6 +28,11 @@ module.exports = async (ctx, next) => {
   }
 
   if (isAllow) {
+    try {
+      // 校验token
+      let payload = jwt.decode(token, GB_CONFIG.JWT_SECRET);
+      ctx.state.payload = payload;
+    } catch (err) { }
     await next();
   } else {
     try {

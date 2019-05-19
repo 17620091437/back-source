@@ -32,8 +32,9 @@ module.exports = {
   },
   // 查看个人信息
   async detail(ctx) {
-    let userId = parseInt(ctx.params.id);
-    let res = await UserService.getDetail(userId);
+    let userId = ctx.state.payload && ctx.state.payload.userId;
+    let seeUserId = parseInt(ctx.params.id);
+    let res = await UserService.getDetail(userId, seeUserId);
     if (res.res) {
       ctx.success(200, res.data);
     } else {
@@ -74,9 +75,22 @@ module.exports = {
   // 关注
   async follow(ctx) {
     let followUserId = parseInt(ctx.query.userId);  // 被关注id
-    let fansUserId = ctx.state.payload.userId;
+    let fansUserId = ctx.state.payload && ctx.state.payload.userId;
     if (!fansUserId) return ctx.invalid('没有登录');
     let res = await UserService.follow(fansUserId, followUserId);
+    if (res.res) {
+      ctx.success(200, res.data);
+    } else {
+      ctx.error(500, res.errMsg);
+    }
+  },
+
+  // 取消关注
+  async unfollow(ctx) {
+    let unfollowUserId = parseInt(ctx.query.userId);  // 被取消关注id
+    let fansUserId = ctx.state.payload && ctx.state.payload.userId;
+    if (!fansUserId) return ctx.invalid('没有登录');
+    let res = await UserService.unfollow(fansUserId, unfollowUserId);
     if (res.res) {
       ctx.success(200, res.data);
     } else {

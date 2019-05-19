@@ -20,11 +20,22 @@ module.exports = {
     let token = util.createToken(user.id, null);
     return { res: true, errMsg, data: user, token };
   },
-  async getDetail(userId) {
+  async getDetail(userId = 0, seeUserId) {
     let res = false;
-    if (!userId) return { res, errMsg: '缺少用户id' };
-    let data = await User.findByPk(userId, {
-      attributes: ['account', 'name', 'sex', 'follow', 'avator', 'fans']
+    if (!seeUserId) return { res, errMsg: '缺少用户id' };
+    let data = await User.findByPk(seeUserId, {
+      attributes: ['account', 'name', 'sex', 'follow', 'avator', 'fans', 'id'],
+      include: [
+        {
+          model: User,
+          as: 'fans-list',
+          attributes: ['id', 'account', 'name', 'follow', 'sex', 'fans', 'avator'],
+          through: {
+            attributes: [],
+            where: { 'fans_user_id': userId }
+          }
+        }
+      ]
     });
     if (!data) return { res, errMsg: '用户不存在' }
     return { res: true, data };
@@ -100,7 +111,7 @@ module.exports = {
     if (!followUser) return { res, errMsg: '关注用户id不存在' };
     let fansUser = await User.findByPk(fansUserId);
     if (!fansUser) return { res, errMsg: '用户id不存在' };
-    let relation = FollowRelation.find({ where: { fans_user_id: fansUserId, follow_user_id: followUserId } });
+    let relation = await FollowRelation.findAll({ where: { fans_user_id: fansUserId, follow_user_id: followUserId } });
     if (relation.length > 0) return { res, errMsg: '重复关注' };
     let data = await FollowRelation.create({
       fans_user_id: fansUserId,
@@ -108,6 +119,30 @@ module.exports = {
     });
     await followUser.increment('fans', { by: 1 });
     await fansUser.increment('follow', { by: 1 });
+    return { res: true }
+  },
+
+  //取消关注
+  async unfollow(fansUserId, unfollowUserId) {
+    let res = false;
+    if (!fansUserId) return { res, errMsg: '非法用户id' };
+    if (!unfollowUserId) return { res, errMsg: '关注用户id非法' };
+    if (fansUserId == unfollowUserId) return { res, errMsg: '用户id和关注用户id不可相等' };
+    let followUser = await User.findByPk(unfollowUserId);
+    if (!followUser) return { res, errMsg: '关注用户id不存在' };
+    let fansUser = await User.findByPk(fansUserId);
+    if (!fansUser) return { res, errMsg: '用户id不存在' };
+    let relation = await FollowRelation.findAll({ where: { fans_user_id: fansUserId, follow_user_id: unfollowUserId } });
+    if (relation.length == 0) return { res, errMsg: '重复取消' };
+    await FollowRelation.destroy({
+      where: {
+        fans_user_id: fansUserId,
+        follow_user_id: unfollowUserId
+      },
+      force: true
+    });
+    await followUser.decrement('fans', { by: 1 });
+    await fansUser.decrement('follow', { by: 1 });
     return { res: true }
   },
 
