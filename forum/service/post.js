@@ -1,5 +1,5 @@
 module.exports = {
-  async getList(page = 1, pageCount = 10, topicId = 0) {
+  async getList(userId = 0, page = 1, pageCount = 10, topicId = 0) {
     let where = {};
     if (topicId !== 0) {
       where.topic_id = topicId
@@ -10,7 +10,21 @@ module.exports = {
       limit: pageCount,
       attributes: { exclude: ['content'] },
       include: [
-        { model: User, attributes: User.showAttributes, },
+        {
+          model: User,
+          attributes: User.showAttributes,
+          include: [
+            {
+              model: User,
+              as: 'follow-list',
+              attributes: User.showAttributes,
+              where: { id: userId },
+              through: {
+                attributes: [],
+              }
+            }
+          ]
+        },
         { model: Topic, attributes: ['id', 'title'] }
       ]
     });
