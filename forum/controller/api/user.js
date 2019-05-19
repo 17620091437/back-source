@@ -62,7 +62,7 @@ module.exports = {
       let avator = ctx.request.body.avator;
       let res = await UserService.updateInfo(userId, { name, sex, avator });
       if (res.res) {
-        ctx.success(200, { id: res.data.id });
+        ctx.success(200, { id: res.data.id, name: res.data.name });
       } else {
         ctx.error(500, res.errMsg);
       }
