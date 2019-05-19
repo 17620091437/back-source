@@ -4,7 +4,7 @@ module.exports = {
     let topicId = ctx.query.topicId ? parseInt(ctx.query.topicId) : 0;
     let pageCount = 10;
     let userId = parseInt(ctx.state.payload.userId) || 0;
-    let data = await PostService.getList(page, pageCount, topicId);
+    let data = await PostService.getList(userId, page, pageCount, topicId);
     ctx.success(200, data);
   },
   async getById(ctx) {
