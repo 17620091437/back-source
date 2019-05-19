@@ -10,7 +10,7 @@ module.exports = {
       limit: pageCount,
       attributes: { exclude: ['content'] },
       include: [
-        { model: User, attributes: ['id', 'name', 'follow', 'sex'] },
+        { model: User, attributes: User.showAttributes, },
         { model: Topic, attributes: ['id', 'title'] }
       ]
     });
@@ -21,7 +21,7 @@ module.exports = {
       include: [
         {
           model: User,
-          attributes: ['id', 'name', 'follow', 'sex'],
+          attributes: User.showAttributes,
         },
         { model: Topic, attributes: ['id', 'title'] }
       ]

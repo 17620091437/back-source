@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 module.exports = {
   tableName: 'user',
+  showAttributes: ['id', 'account', 'name', 'follow', 'sex', 'fans', 'avator'],
   tableStruct: {
     id: {
       type: Sequelize.INTEGER,
@@ -8,10 +9,14 @@ module.exports = {
       primaryKey: true,
       autoIncrement: true,
     },
+    avator: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      defaultValue: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558245295931&di=ceea4921ea49690b874516859cb3efe6&imgtype=0&src=http%3A%2F%2Fimage.yy.com%2Fyywebalbumbs2bucket%2F2d0d66e18b9f495e9f9db25dcb687935_1435932432985.jpg'
+    },
     account: {
       type: Sequelize.STRING,
       allowNull: false,
-      primaryKey: true,
       unique: true,
       validate: {
         notEmpty: true,
@@ -38,11 +43,17 @@ module.exports = {
       defaultValue: 0,
       allowNull: false,
     },
-    // 粉丝数
+    // 关注数
     follow: {
       type: Sequelize.INTEGER,
       defaultValue: 0,
       allowNull: false,
-    }
+    },
+    // 粉丝数
+    fans: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
   }
 }

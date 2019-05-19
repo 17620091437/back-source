@@ -7,7 +7,7 @@ module.exports = {
       offset: (page - 1) * pageCount,
       limit: pageCount,
       include: [
-        { model: User, attributes: ['id', 'name', 'follow', 'sex'] },
+        { model: User, attributes: User.showAttributes, },
       ]
     });
     return { res: true, data };
