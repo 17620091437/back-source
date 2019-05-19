@@ -25,6 +25,7 @@ const config = {
       { method: 'get', path: /^\/comment$/ },  // 评论列表
       { method: 'get', path: /^\/follow -list$/ }, // 关注列表
       { method: 'get', path: /^\/fans-list$/ },  // 粉丝列表
+      { method: 'post', path: /^\/upload$/ }, // 上传
     ]
   }
 };
