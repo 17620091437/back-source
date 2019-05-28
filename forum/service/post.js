@@ -1,8 +1,11 @@
 module.exports = {
-  async getList(userId = 0, page = 1, pageCount = 10, topicId = 0) {
+  async getList(userId = 0, page = 1, pageCount = 10, topicId = 0, selectedUserId) {
     let where = {};
     if (topicId !== 0) {
       where.topic_id = topicId;
+    }
+    if (selectedUserId) {
+      where.user_id = selectedUserId;
     }
     let data = await Post.findAndCountAll({
       offset: (page - 1) * pageCount,
@@ -61,16 +64,18 @@ module.exports = {
     });
     return { res: true, data }
   },
-  async update(postId, userId, title, content) {
+  async update(postId, userId, topicId, title, content) {
     let res = false;
     if (!postId) return { res, errMsg: '缺少帖子id' };
     if (!userId) return { res, errMsg: '缺少用户id' };
+    if (!topicId) return { res, errMsg: '缺少主题' };
     if (!title) return { res, errMsg: '缺少标题' };
     if (!content) return { res, errMsg: '缺少内容' };
     let post = await Post.findByPk(postId);
     if (!post) return { res, errMsg: '帖子不存在' };
     if (post.user_id !== userId) return { res, errMsg: '没有权限' };
     await post.update({
+      topic_id: topicId,
       title,
       content
     });
