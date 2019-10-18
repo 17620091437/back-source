@@ -6,9 +6,9 @@
 module.exports = {
   development: {
     username: 'root',
-    password: '',
-    database: 'forum',
-    host: '127.0.0.1',
+    password: 'CrazyBall',
+    database: 'forum_test',
+    host: '106.15.73.155',
     port: 3306,
     dialect: 'mysql',
   },
