@@ -1,6 +1,7 @@
 /**
  * 错误处理中间件
  */
+const logger = require("../common/logger")
 module.exports = async (ctx, next) => {
   try {
     await next();
@@ -12,6 +13,7 @@ module.exports = async (ctx, next) => {
     console.log(`${err.stack}`.red.bold);
     console.log('************ ERROR MESSAGE ************'.red.bold);
     console.log('======================================='.yellow.bold);
+    logger.errLoger.error(err.stack)
     if (/api/.test(ctx.originalUrl)) {
       // api错误处理
       ctx.status = 500;
