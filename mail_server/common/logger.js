@@ -5,7 +5,7 @@ log4js.configure({
     'default': { type: 'console' },
     'mailLog': {
       type: "file",
-      filename: path.join(__dirname, '../log/mail/mail-log'),
+      filename: process.env.NODE_ENV == "production" ? "/root/crazyball/static/log/mail/mail-log" : path.join(__dirname, '../log/mail/mail-log'),
       alwaysIncludePattern: true,
       pattern: "yyyy-MM-dd.log",
       encoding: 'utf-8',//default "utf-8"，文件的编码
@@ -13,7 +13,7 @@ log4js.configure({
     },
     'error': {
       type: "file",
-      filename: path.join(__dirname, '../log/error/error-log'),
+      filename: process.env.NODE_ENV == "production" ? "/root/crazyball/static/log/mail/error-log" : path.join(__dirname, '../log/mail/error-log'),
       alwaysIncludePattern: true,
       pattern: "yyyy-MM-dd.log",
       encoding: 'utf-8',//default "utf-8"，文件的编码
