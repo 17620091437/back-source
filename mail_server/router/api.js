@@ -4,4 +4,9 @@ module.exports = [
     path: '/sendMail',
     action: 'mail.sendMail'
   },
+  {
+    method:'post',
+    path:'/upload',
+    action:'upload.upload'
+  }
 ]

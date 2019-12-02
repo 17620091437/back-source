@@ -18,7 +18,9 @@ const config = {
   MAIL_USER: "17620091437@163.com",
   MAIL_PASS: "6401948qq",
   Send_Mail_Interval: 3000,
-  AUTH_KEY: "BALLCRAZY"
+  AUTH_KEY: "BALLCRAZY",
+  //upload
+  UPLOAD_PATH:"/Users/nero/Desktop/upload",
 };
 
 global.GB_CONFIG = config;
